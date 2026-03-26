@@ -134,6 +134,14 @@ export function ColophonSection() {
                 公式LINE
               </a>
             </li>
+            <li>
+              <Link
+                href="/legal"
+                className="font-mono text-xs text-foreground/90 hover:text-accent transition-colors duration-200 underline-offset-4 hover:underline"
+              >
+                特定商取引法に基づく表記
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -154,13 +162,13 @@ export function ColophonSection() {
         <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest">
           © 2025 合同会社NY33. All rights reserved.
         </p>
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <p className="font-mono text-[10px] text-muted-foreground">広島県尾道市因島</p>
           <Link
             href="/legal"
-            className="font-mono text-[9px] text-muted-foreground/45 hover:text-muted-foreground/80 transition-colors"
+            className="font-mono text-xs text-foreground/75 hover:text-accent transition-colors duration-200 underline-offset-4 hover:underline"
           >
-            特商法表記
+            特定商取引法に基づく表記
           </Link>
         </div>
       </div>
