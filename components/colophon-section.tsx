@@ -157,10 +157,10 @@ export function ColophonSection() {
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
           <p className="font-mono text-[10px] text-muted-foreground">広島県尾道市因島</p>
           <Link
-            href="/tokutei"
+            href="/legal"
             className="font-mono text-[9px] text-muted-foreground/45 hover:text-muted-foreground/80 transition-colors"
           >
-            審査提出
+            特商法表記
           </Link>
         </div>
       </div>
