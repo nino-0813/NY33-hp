@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { IBM_Plex_Sans, IBM_Plex_Mono, Bebas_Neue } from "next/font/google"
+import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import { SmoothScroll } from "@/components/smooth-scroll"
 import "./globals.css"
@@ -51,6 +52,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" className="dark bg-background">
+      <head>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-JMR6XDWCXE" />
+        <Script id="google-gtag">
+          {`
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-JMR6XDWCXE');
+          `}
+        </Script>
+      </head>
       <body
         className={`${ibmPlexSans.variable} ${bebasNeue.variable} ${ibmPlexMono.variable} font-sans antialiased overflow-x-hidden`}
       >
