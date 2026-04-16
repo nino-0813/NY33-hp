@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   description:
     "広島県尾道市因島の合同会社NY33。HP制作・LP制作・SEO対策・AIO対策・マーケティング集客動線構築。",
   generator: "v0.app",
+  verification: {
+    google: "6X4w5YbULu48pJ2_p-xRuqrUeIvplICPqfkKY5Fr2Nw",
+  },
   icons: {
     icon: [
       {
