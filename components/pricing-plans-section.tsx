@@ -128,6 +128,7 @@ const plans: Plan[] = [
         items: [
           { text: "SNS連携（Instagram埋め込み等）", included: true },
           { text: "LINE公式アカウント連携", included: true },
+          { text: "データベース設計（Supabase + Googleスプレッドシート保存）", included: true },
           { text: "決済システム導入", included: false },
           { text: "予約システム連携", included: false },
         ],
@@ -184,6 +185,7 @@ const plans: Plan[] = [
         items: [
           { text: "SNS連携（Instagram埋め込み等）", included: true },
           { text: "LINE公式アカウント連携", included: true },
+          { text: "データベース設計（Supabase + Googleスプレッドシート保存）", included: true },
           { text: "決済システム導入（Stripe等）", included: true },
           { text: "予約システム連携", included: true },
         ],
@@ -392,7 +394,7 @@ export function PricingPlansSection() {
       </div>
 
       <Dialog open={isContactOpen} onOpenChange={setIsContactOpen}>
-        <DialogContent className="sm:max-w-2xl">
+        <DialogContent className="sm:max-w-2xl max-h-[calc(100dvh-2rem)] overflow-y-auto overscroll-contain">
           <DialogHeader>
             <DialogTitle className="font-[var(--font-bebas)] text-3xl tracking-tight">お問い合わせフォーム</DialogTitle>
             <DialogDescription className="font-mono text-xs text-muted-foreground">
@@ -450,7 +452,7 @@ export function PricingPlansSection() {
               />
             </div>
 
-            <div className="md:col-span-2 flex items-center justify-between gap-3">
+            <div className="md:col-span-2 sticky bottom-0 z-10 -mx-1 mt-2 flex items-center justify-between gap-3 border-t border-white/10 bg-[#111827]/95 px-1 pt-3 pb-1 backdrop-blur">
               <p
                 className="font-mono text-[11px]"
                 style={{
