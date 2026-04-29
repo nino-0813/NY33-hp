@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { BlogHeader } from "@/components/blog/BlogHeader"
 import { TableOfContents } from "@/components/blog/TableOfContents"
 import { CTASection } from "@/components/blog/CTASection"
+import { TrackedInternalLink } from "@/components/blog/TrackedInternalLink"
 import { BeforeAfterSearch } from "@/components/blog/BeforeAfterSearch"
 import { LocalSEOChecklist } from "@/components/blog/LocalSEOChecklist"
 import { SITE_PUBLIC_URL } from "@/lib/site"
@@ -84,6 +84,9 @@ export const metadata: Metadata = {
     title: "「地域名＋サロン」で検索1ページ目に表示させるためにやった5つのこと",
     description: "ローカルSEO実践ガイド。GBP・NAP・サイト・ブログ・口コミの5ステップ。",
   },
+  alternates: {
+    canonical: "/blog/salon-local-seo-5steps",
+  },
 }
 
 export default function SalonLocalSeo5StepsPage() {
@@ -96,6 +99,10 @@ export default function SalonLocalSeo5StepsPage() {
     publisher: { "@type": "Organization", name: "合同会社NY33" },
     datePublished: "2026-04-29",
     dateModified: "2026-04-29",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_PUBLIC_URL}/blog/salon-local-seo-5steps`,
+    },
   }
 
   const howToJsonLd = {
@@ -391,27 +398,31 @@ export default function SalonLocalSeo5StepsPage() {
       <CTASection
         heading="あなたのサロン、検索で見つかりますか？"
         body="NY33では、サロンのローカルSEO対策をトータルでサポートしています。GBPの最適化からサイトのSEO設定、コンテンツ制作まで、「地域名＋サロン」で検索1ページ目に表示されるための施策をご提案します。"
-        gaLocation="blog_article_local_seo"
+        articleSlug="salon-local-seo-5steps"
+        position="bottom"
+        ctaType="line"
       />
 
       <section className="mt-16 border-t border-white/[0.06] pt-12">
         <h2 className="text-xl font-bold text-white">関連記事</h2>
         <ul className="mt-4 space-y-3">
           <li>
-            <Link
+            <TrackedInternalLink
+              fromArticle="salon-local-seo-5steps"
               href="/blog/salon-shukyaku-without-hotpepper"
               className="text-orange-400 underline-offset-4 transition-colors hover:text-orange-300 hover:underline"
             >
               ホットペッパーに頼らないサロン集客の始め方｜自社サイト×SNS×LINEで予約を安定させる方法
-            </Link>
+            </TrackedInternalLink>
           </li>
           <li>
-            <Link
+            <TrackedInternalLink
+              fromArticle="salon-local-seo-5steps"
               href="/blog/salon-aio-ai-search"
               className="text-orange-400 underline-offset-4 transition-colors hover:text-orange-300 hover:underline"
             >
               ChatGPTに自分のサロンを紹介してもらうには？AI検索時代の新しい集客対策
-            </Link>
+            </TrackedInternalLink>
           </li>
         </ul>
       </section>

@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "よくある質問（FAQ）｜合同会社NY33",
   description:
     "合同会社NY33のWeb制作・SEO対策・AIO対策に関するよくある質問をまとめました。料金、制作の流れ、サポート内容など、ご依頼前の疑問にお答えします。",
+  alternates: {
+    canonical: "/faq",
+  },
   openGraph: {
     title: "よくある質問（FAQ）｜合同会社NY33",
     description: "Web制作・SEO・AIO対策に関するよくある質問と回答。",

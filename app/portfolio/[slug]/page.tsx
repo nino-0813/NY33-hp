@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { portfolioItems } from "@/lib/portfolio"
+import { SITE_PUBLIC_URL } from "@/lib/site"
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -22,9 +23,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${item.title} | Portfolio`,
     description: item.description,
+    alternates: {
+      canonical: `/portfolio/${slug}`,
+    },
     openGraph: {
       title: `${item.title} | Portfolio`,
       description: item.description,
+      url: `${SITE_PUBLIC_URL}/portfolio/${slug}`,
       images: item.image ? [item.image] : undefined,
     },
   }

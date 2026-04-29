@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { trackEvent } from "@/lib/gtag"
 import { cn } from "@/lib/utils"
 
 export type FAQItem = {
@@ -26,7 +27,14 @@ function FAQRow({ item }: { item: FAQItem }) {
       <button
         type="button"
         className="flex w-full items-start justify-between gap-4 py-4 text-left"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() =>
+          setOpen((v) => {
+            if (!v) {
+              trackEvent("faq_open", { question: item.question })
+            }
+            return !v
+          })
+        }
         aria-expanded={open}
       >
         <span className="font-bold text-white">{item.question}</span>

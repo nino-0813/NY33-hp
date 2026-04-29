@@ -1,3 +1,5 @@
+import { getPageContextFromPathname } from "@/lib/page-context"
+
 /** GA4 計測ID（`.env.local` の `NEXT_PUBLIC_GA_MEASUREMENT_ID` で上書き可） */
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? "G-JMR6XDWCXE"
 
@@ -8,13 +10,23 @@ declare global {
   }
 }
 
-/** SPA 遷移後のページビュー（layout の初期 config は `send_page_view: false` とセットで利用） */
+/**
+ * SPA 遷移後のページビュー（layout の初期 config は `send_page_view: false` とセットで利用）。
+ * GA4 の `config` に続けて、`page_view_context` で page_type / article_slug を送る（カスタム次元用）。
+ */
 export function pageview(pathWithQuery: string) {
   if (typeof window === "undefined" || !GA_MEASUREMENT_ID) return
   if (typeof window.gtag !== "function") return
   window.gtag("config", GA_MEASUREMENT_ID, {
     page_path: pathWithQuery,
     page_title: typeof document !== "undefined" ? document.title : undefined,
+  })
+  const pathnameOnly = pathWithQuery.split("?")[0] ?? ""
+  const ctx = getPageContextFromPathname(pathnameOnly)
+  trackEvent("page_view_context", {
+    page_type: ctx.page_type,
+    page_path: pathWithQuery,
+    ...(ctx.article_slug ? { article_slug: ctx.article_slug } : {}),
   })
 }
 

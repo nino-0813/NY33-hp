@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import { trackEvent } from "@/lib/gtag"
 import { cn } from "@/lib/utils"
 import type { FaqCategory } from "@/data/faq-page-data"
 import { faqAnchorId } from "@/data/faq-page-data"
@@ -114,11 +115,15 @@ export function FAQPageClient({ categories }: { categories: FaqCategory[] }) {
     [categories],
   )
 
-  const toggle = useCallback((itemId: string) => {
+  const toggle = useCallback((itemId: string, question: string) => {
     setOpenIds((prev) => {
       const next = new Set(prev)
-      if (next.has(itemId)) next.delete(itemId)
-      else next.add(itemId)
+      if (next.has(itemId)) {
+        next.delete(itemId)
+      } else {
+        next.add(itemId)
+        trackEvent("faq_open", { question })
+      }
       return next
     })
   }, [])
@@ -197,7 +202,7 @@ export function FAQPageClient({ categories }: { categories: FaqCategory[] }) {
                       question={item.question}
                       answer={item.answer}
                       open={open}
-                      onToggle={() => toggle(itemId)}
+                      onToggle={() => toggle(itemId, item.question)}
                     />
                   )
                 })}

@@ -6,7 +6,9 @@ import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import { SmoothScroll } from "@/components/smooth-scroll"
 import { GaPageView } from "@/components/ga-page-view"
+import { ScrollDepthTracker } from "@/components/analytics/scroll-depth-tracker"
 import { GA_MEASUREMENT_ID } from "@/lib/gtag"
+import { SITE_PUBLIC_URL } from "@/lib/site"
 import "./globals.css"
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -22,6 +24,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--font-bebas" })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_PUBLIC_URL),
   title: "合同会社NY33 — 広島県尾道市因島 | Web制作・マーケティング",
   description:
     "広島県尾道市因島の合同会社NY33。HP制作・LP制作・SEO対策・AIO対策・マーケティング集客動線構築。",
@@ -76,9 +79,12 @@ gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
         <div className="noise-overlay" aria-hidden="true" />
         <SmoothScroll>{children}</SmoothScroll>
         {GA_MEASUREMENT_ID ? (
-          <Suspense fallback={null}>
-            <GaPageView />
-          </Suspense>
+          <>
+            <ScrollDepthTracker />
+            <Suspense fallback={null}>
+              <GaPageView />
+            </Suspense>
+          </>
         ) : null}
         <Analytics />
       </body>

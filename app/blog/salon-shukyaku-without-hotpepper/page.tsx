@@ -4,6 +4,7 @@ import { BlogHeader } from "@/components/blog/BlogHeader"
 import { TableOfContents } from "@/components/blog/TableOfContents"
 import { ComparisonTable } from "@/components/blog/ComparisonTable"
 import { CTASection } from "@/components/blog/CTASection"
+import { SITE_PUBLIC_URL } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: "ホットペッパーに頼らないサロン集客の始め方｜自社サイト×SNS×LINEで予約を安定させる方法",
@@ -23,6 +24,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ホットペッパーに頼らないサロン集客の始め方",
     description: "自社サイト×SNS×LINEで予約を安定させる方法。2026年を勝ち抜くサロンの集客戦略を解説。",
+  },
+  alternates: {
+    canonical: "/blog/salon-shukyaku-without-hotpepper",
   },
 }
 
@@ -84,6 +88,10 @@ export default function SalonShukyakuWithoutHotpepperPage() {
     publisher: { "@type": "Organization", name: "合同会社NY33" },
     datePublished: "2026-04-29",
     dateModified: "2026-04-29",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_PUBLIC_URL}/blog/salon-shukyaku-without-hotpepper`,
+    },
   }
 
   return (
@@ -215,7 +223,7 @@ export default function SalonShukyakuWithoutHotpepperPage() {
         ))}
       </div>
 
-      <CTASection />
+      <CTASection articleSlug="salon-shukyaku-without-hotpepper" position="bottom" ctaType="line" />
 
       {/* TODO: 関連記事が増えたら表示 */}
       {false && (

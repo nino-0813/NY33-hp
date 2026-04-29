@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { BlogHeader } from "@/components/blog/BlogHeader"
 import { TableOfContents } from "@/components/blog/TableOfContents"
 import { CTASection } from "@/components/blog/CTASection"
+import { TrackedInternalLink } from "@/components/blog/TrackedInternalLink"
 import { AISearchDemo } from "@/components/blog/AISearchDemo"
 import { SEOvsAIOComparison } from "@/components/blog/SEOvsAIOComparison"
 import { FAQAccordion, type FAQItem } from "@/components/blog/FAQAccordion"
@@ -110,6 +110,9 @@ export const metadata: Metadata = {
     title: "ChatGPTに自分のサロンを紹介してもらうには？",
     description: "AI検索時代の新しい集客対策。AIO（AI検索最適化）のポイントを解説。",
   },
+  alternates: {
+    canonical: "/blog/salon-aio-ai-search",
+  },
 }
 
 export default function SalonAioAiSearchPage() {
@@ -122,6 +125,10 @@ export default function SalonAioAiSearchPage() {
     publisher: { "@type": "Organization", name: "合同会社NY33" },
     datePublished: "2026-04-29",
     dateModified: "2026-04-29",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_PUBLIC_URL}/blog/salon-aio-ai-search`,
+    },
   }
 
   const faqJsonLd = {
@@ -391,19 +398,22 @@ export default function SalonAioAiSearchPage() {
       <CTASection
         heading="あなたのサロン、AIに紹介されていますか？"
         body="NY33では、サロンのAIO対策（AI検索最適化）をサポートしています。構造化データの実装からコンテンツ設計まで、AI時代に『選ばれるサロン』になるためのお手伝いをします。"
-        gaLocation="blog_article_aio"
+        articleSlug="salon-aio-ai-search"
+        position="bottom"
+        ctaType="line"
       />
 
       <section className="mt-16 border-t border-white/[0.06] pt-12">
         <h2 className="text-xl font-bold text-white">関連記事</h2>
         <ul className="mt-4 space-y-3">
           <li>
-            <Link
+            <TrackedInternalLink
+              fromArticle="salon-aio-ai-search"
               href="/blog/salon-shukyaku-without-hotpepper"
               className="text-orange-400 underline-offset-4 transition-colors hover:text-orange-300 hover:underline"
             >
               ホットペッパーに頼らないサロン集客の始め方｜自社サイト×SNS×LINEで予約を安定させる方法
-            </Link>
+            </TrackedInternalLink>
           </li>
         </ul>
       </section>
