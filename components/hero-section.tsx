@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { LINE_URL, CONTACT_EMAIL } from "@/lib/site"
+import { LINE_URL } from "@/lib/site"
+import { ga } from "@/lib/gtag"
 import { ScrambleTextOnHover } from "@/components/scramble-text"
 import { SplitFlapText, SplitFlapMuteToggle, SplitFlapAudioProvider } from "@/components/split-flap-text"
 import { AnimatedNoise } from "@/components/animated-noise"
@@ -68,6 +69,7 @@ export function HeroSection() {
           <a
             href="#work"
             className="group inline-flex items-center gap-3 border border-foreground/20 px-6 py-3 font-mono text-xs uppercase tracking-widest text-foreground hover:border-accent hover:text-accent transition-all duration-200"
+            onClick={() => ga.clickAnchor("work", "hero")}
           >
             <ScrambleTextOnHover text="事業内容を見る" as="span" duration={0.6} />
             <BitmapChevron className="transition-transform duration-[400ms] ease-in-out group-hover:rotate-45" />
@@ -75,12 +77,14 @@ export function HeroSection() {
           <a
             href="#signals"
             className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200"
+            onClick={() => ga.clickAnchor("signals", "hero")}
           >
             お知らせ
           </a>
           <a
-            href={`mailto:${CONTACT_EMAIL}`}
+            href="#pricing"
             className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200"
+            onClick={() => ga.clickAnchor("pricing", "hero")}
           >
             お問い合わせ
           </a>
@@ -89,6 +93,7 @@ export function HeroSection() {
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200"
+            onClick={() => ga.clickLine("hero")}
           >
             公式LINE
           </a>

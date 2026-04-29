@@ -1,9 +1,12 @@
 import type React from "react"
 import type { Metadata } from "next"
+import { Suspense } from "react"
 import { IBM_Plex_Sans, IBM_Plex_Mono, Bebas_Neue } from "next/font/google"
 import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import { SmoothScroll } from "@/components/smooth-scroll"
+import { GaPageView } from "@/components/ga-page-view"
+import { GA_MEASUREMENT_ID } from "@/lib/gtag"
 import "./globals.css"
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -53,21 +56,30 @@ export default function RootLayout({
   return (
     <html lang="ja" className="dark bg-background">
       <head>
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-JMR6XDWCXE" />
-        <Script id="google-gtag">
-          {`
+        {GA_MEASUREMENT_ID ? (
+          <>
+            <Script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
+            <Script id="google-gtag-init">
+              {`
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-JMR6XDWCXE');
-          `}
-        </Script>
+gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: false });
+              `}
+            </Script>
+          </>
+        ) : null}
       </head>
       <body
         className={`${ibmPlexSans.variable} ${bebasNeue.variable} ${ibmPlexMono.variable} font-sans antialiased overflow-x-hidden`}
       >
         <div className="noise-overlay" aria-hidden="true" />
         <SmoothScroll>{children}</SmoothScroll>
+        {GA_MEASUREMENT_ID ? (
+          <Suspense fallback={null}>
+            <GaPageView />
+          </Suspense>
+        ) : null}
         <Analytics />
       </body>
     </html>

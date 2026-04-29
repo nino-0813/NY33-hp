@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import gsap from "gsap"
+import { ga } from "@/lib/gtag"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -312,6 +313,7 @@ export function ColophonSection() {
           <Link
             href="/legal"
             className="font-mono text-xs text-foreground/75 hover:text-accent transition-colors duration-200 underline-offset-4 hover:underline"
+            onClick={() => ga.clickLegal()}
           >
             特定商取引法に基づく表記
           </Link>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
+import { ga } from "@/lib/gtag"
 
 const navItems = [
   { id: "hero", label: "トップ" },
@@ -36,6 +37,7 @@ export function SideNav() {
   }, [])
 
   const scrollToSection = (id: string) => {
+    ga.sideNav(id)
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })

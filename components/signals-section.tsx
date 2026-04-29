@@ -1,7 +1,9 @@
 "use client"
 
 import { useRef, useState, useEffect } from "react"
+import Link from "next/link"
 import { cn } from "@/lib/utils"
+import { ga } from "@/lib/gtag"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
@@ -9,34 +11,11 @@ gsap.registerPlugin(ScrollTrigger)
 
 const blogPosts = [
   {
-    date: "2025.06.10",
-    title: "整体院ホームページのSEO設計テンプレート",
-    note: "地域名×サービス名で上位表示を狙うための見出し構成・内部リンク設計・CTA配置を解説。",
-    keyword: "整体院 SEO",
-  },
-  {
-    date: "2025.05.28",
-    title: "サロン集客で効くローカルSEOの基本",
-    note: "Googleビジネスプロフィール最適化とサイト連携で、来店導線を強化する実践手順を紹介。",
-    keyword: "サロン 集客 ローカルSEO",
-  },
-  {
-    date: "2025.05.15",
-    title: "LPでCVRを上げるファーストビュー設計",
-    note: "離脱を防ぐコピー、信頼訴求、CTA配置まで、ABテストしやすい設計に落とし込みます。",
-    keyword: "LP CVR 改善",
-  },
-  {
-    date: "2025.04.30",
-    title: "SEO記事の構成案を最速で作る方法",
-    note: "検索意図の分解から見出し作成、FAQ設計まで、制作現場で使えるワークフローを公開。",
-    keyword: "SEO 記事構成",
-  },
-  {
-    date: "2025.04.12",
-    title: "AIO時代に必要なコンテンツ最適化",
-    note: "AI検索にも伝わる情報設計として、構造化・一次情報・E-E-A-Tの整え方を整理します。",
-    keyword: "AIO コンテンツ最適化",
+    date: "2026.04.29",
+    title: "ホットペッパーに頼らないサロン集客の始め方",
+    note: "自社サイト×SNS×LINEで予約を安定させる方法。脱ホットペッパーから始める自社メディア集客のロードマップ。",
+    keyword: "サロン 集客",
+    href: "/blog/salon-shukyaku-without-hotpepper",
   },
 ]
 
@@ -141,7 +120,7 @@ export function SignalsSection() {
       {/* Section header */}
       <div ref={headerRef} className="mb-16 pr-6 md:pr-12">
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">01 / Blog</span>
-        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">SEOブログ</h2>
+        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">お知らせ</h2>
       </div>
 
       {/* Horizontal scroll container */}
@@ -165,7 +144,7 @@ function SignalCard({
   signal,
   index,
 }: {
-  signal: { date: string; title: string; note: string; keyword: string }
+  signal: { date: string; title: string; note: string; keyword: string; href?: string }
   index: number
 }) {
   return (
@@ -174,9 +153,19 @@ function SignalCard({
         "group relative flex-shrink-0 w-80",
         "transition-transform duration-500 ease-out",
         "hover:-translate-y-2",
+        signal.href && "cursor-pointer",
       )}
     >
       {/* Card with paper texture effect */}
+      {signal.href ? (
+        <Link
+          href={signal.href}
+          className="absolute inset-0 z-20"
+          aria-label={`${signal.title}の記事ページへ移動`}
+          onClick={() => ga.selectBlogCard(signal.href!)}
+        />
+      ) : null}
+
       <div className="relative bg-card border border-border/50 md:border-t md:border-l md:border-r-0 md:border-b-0 p-8">
         {/* Top torn edge effect */}
         <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-border/40 to-transparent" />

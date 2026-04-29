@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { portfolioItems, type PortfolioItem } from "@/lib/portfolio"
+import { ga } from "@/lib/gtag"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
@@ -80,6 +81,7 @@ export function PortfolioSection() {
         <Link
           href="/portfolio"
           className="group inline-flex items-center gap-3 border border-foreground/20 px-6 py-3 font-mono text-xs uppercase tracking-widest text-foreground hover:border-accent hover:text-accent transition-all duration-200"
+          onClick={() => ga.portfolioList()}
         >
           その他の事例はこちら
           <span className="transition-transform duration-[400ms] ease-in-out group-hover:translate-x-1">→</span>
@@ -133,6 +135,7 @@ function PortfolioCard({
         href={`/portfolio/${item.slug}`}
         className="absolute inset-0 z-20"
         aria-label={`${item.title}の詳細ページを開く`}
+        onClick={() => ga.portfolioCard(item.slug, item.title)}
       />
 
       <div

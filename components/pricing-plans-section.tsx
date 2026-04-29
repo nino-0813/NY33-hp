@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { ga } from "@/lib/gtag"
 
 type PlanItem = {
   text: string
@@ -230,6 +231,7 @@ export function PricingPlansSection() {
   const [submitMessage, setSubmitMessage] = useState("")
 
   const openContactDialog = (planName: string) => {
+    ga.openContactDialog(planName)
     setSelectedPlan(planName)
     setSubmitMessage("")
     setIsContactOpen(true)
@@ -265,6 +267,7 @@ export function PricingPlansSection() {
       }
 
       setSubmitMessage("送信完了しました。担当者よりご連絡いたします。")
+      ga.generateLead({ plan: payload.plan, method: "pricing_modal_form" })
       form.reset()
       setSelectedPlan(payload.plan)
     } catch (error) {

@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { AnimatePresence, motion } from "framer-motion"
 import type { ServiceItem } from "@/data/services"
+import { ga } from "@/lib/gtag"
 
 type ServiceModalProps = {
   service: ServiceItem | null
@@ -62,6 +63,7 @@ export function ServiceModal({ service, onClose }: ServiceModalProps) {
               <Link
                 href="/contact"
                 className="inline-flex items-center rounded-lg bg-orange-500 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-orange-600"
+                onClick={() => ga.serviceModalContact(service.title)}
               >
                 まずは無料で相談する →
               </Link>
