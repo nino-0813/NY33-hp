@@ -1,12 +1,13 @@
 "use client"
 
 import { useState, type FormEvent } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { ga } from "@/lib/gtag"
+import { ga, trackEvent } from "@/lib/gtag"
 
 type PlanItem = {
   text: string
@@ -394,6 +395,26 @@ export function PricingPlansSection() {
           <br />
           ※ 月額保守はLIGHTプラン ¥10,000〜 / STANDARD・PREMIUM ¥15,000〜が目安です。
         </p>
+      </div>
+
+      <div className="mt-12 border-t border-border/30 pt-10">
+        <div className="flex flex-col gap-6 rounded-2xl border border-border/40 bg-background/20 p-6 md:flex-row md:items-center md:justify-between md:p-8">
+          <div className="max-w-xl">
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">FAQ</span>
+            <h3 className="mt-2 font-[var(--font-bebas)] text-3xl tracking-tight text-foreground">よくある質問</h3>
+            <p className="mt-3 font-mono text-sm leading-relaxed text-muted-foreground">
+              料金・お支払い、制作の流れ、Next.jsやサポート内容など、ご依頼前によくいただく質問をまとめました。
+            </p>
+          </div>
+          <Link
+            href="/faq"
+            className="group inline-flex shrink-0 items-center justify-center gap-2 border border-accent/40 bg-accent/10 px-8 py-4 font-mono text-xs uppercase tracking-[0.15em] text-foreground transition-colors hover:border-accent hover:bg-accent/15"
+            onClick={() => trackEvent("click_faq_nav", { link_location: "pricing_section" })}
+          >
+            FAQを見る
+            <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+          </Link>
+        </div>
       </div>
 
       <Dialog open={isContactOpen} onOpenChange={setIsContactOpen}>

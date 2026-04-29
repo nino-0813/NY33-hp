@@ -12,6 +12,20 @@ gsap.registerPlugin(ScrollTrigger)
 const blogPosts = [
   {
     date: "2026.04.29",
+    title: "地域名＋サロンで検索1ページ目に",
+    note: "広島県のサロンで実践したローカルSEO 5施策。GBP・NAP・サイト・ブログ・口コミまで解説。",
+    keyword: "ローカルSEO",
+    href: "/blog/salon-local-seo-5steps",
+  },
+  {
+    date: "2026.04.29",
+    title: "ChatGPTに自分のサロンを紹介してもらうには？",
+    note: "AI検索時代のAIO対策。ChatGPT・AI Overviewでサロンが引用されるためのE-E-A-T、構造化データ、FAQ設計まで解説。",
+    keyword: "AIO対策",
+    href: "/blog/salon-aio-ai-search",
+  },
+  {
+    date: "2026.04.29",
     title: "ホットペッパーに頼らないサロン集客の始め方",
     note: "自社サイト×SNS×LINEで予約を安定させる方法。脱ホットペッパーから始める自社メディア集客のロードマップ。",
     keyword: "サロン 集客",
