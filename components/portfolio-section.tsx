@@ -2,31 +2,13 @@
 
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { CONTACT_EMAIL } from "@/lib/site"
+import { portfolioItems, type PortfolioItem } from "@/lib/portfolio"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 gsap.registerPlugin(ScrollTrigger)
-
-const portfolioItems = [
-  {
-    title: "イケベジ",
-    url: "https://www.ikevege.com/",
-    category: "Web",
-    description: "佐渡ヶ島のオーガニックファーム「イケベジ」の公式サイト。自然栽培の考えをベースに、 Farm to Social のコンセプトで設計・制作。",
-    image: "/portfolio/ikevege.webp",
-    span: "col-span-2 row-span-2",
-  },
-  {
-    title: "HOTEL PG",
-    url: "https://www.hotelpg-innosima.com/",
-    category: "Web",
-    description: "広島県因島の隠れ家リゾート「ホテルPG」の公式サイト。瀬戸内の凪に包まれる大人向けホテルのコンセプトで設計・制作。",
-    image: "/portfolio/hotelpg.webp",
-    span: "col-span-2 row-span-2",
-  },
-]
 
 export function PortfolioSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -95,13 +77,13 @@ export function PortfolioSection() {
       </div>
 
       <div className="mt-12 flex justify-start">
-        <a
-          href={`mailto:${CONTACT_EMAIL}?subject=制作事例について`}
+        <Link
+          href="/portfolio"
           className="group inline-flex items-center gap-3 border border-foreground/20 px-6 py-3 font-mono text-xs uppercase tracking-widest text-foreground hover:border-accent hover:text-accent transition-all duration-200"
         >
           その他の事例はこちら
           <span className="transition-transform duration-[400ms] ease-in-out group-hover:translate-x-1">→</span>
-        </a>
+        </Link>
       </div>
     </section>
   )
@@ -112,14 +94,7 @@ function PortfolioCard({
   index,
   persistHover = false,
 }: {
-  item: {
-    title: string
-    url: string
-    category: string
-    description: string
-    image?: string
-    span: string
-  }
+  item: PortfolioItem
   index: number
   persistHover?: boolean
 }) {
@@ -141,7 +116,7 @@ function PortfolioCard({
   }, [persistHover])
 
   const isActive = isHovered || isScrollActive
-  const showImage = item.image && !imgError
+  const showImage = Boolean(item.image && !imgError)
 
   return (
     <article
@@ -154,12 +129,10 @@ function PortfolioCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <a
-        href={item.url}
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        href={`/portfolio/${item.slug}`}
         className="absolute inset-0 z-20"
-        aria-label={`${item.title}のサイトを開く`}
+        aria-label={`${item.title}の詳細ページを開く`}
       />
 
       <div

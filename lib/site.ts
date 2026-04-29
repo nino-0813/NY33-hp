@@ -1,5 +1,5 @@
 /** 公式LINEのURL（LINE公式アカウントのリンクに差し替えてください） */
-export const LINE_URL = "https://lin.ee/xxxxxxxx"
+export const LINE_URL = "https://lin.ee/rKhXGNm"
 
 export const CONTACT_EMAIL = "llc33.company@gmail.com"
 

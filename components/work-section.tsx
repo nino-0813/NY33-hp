@@ -2,48 +2,20 @@
 
 import { useState, useRef, useEffect } from "react"
 import { cn } from "@/lib/utils"
+import { services, type ServiceItem } from "@/data/services"
+import { ServiceModal } from "@/components/ServiceModal"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 gsap.registerPlugin(ScrollTrigger)
 
-const services = [
-  {
-    title: "HP制作",
-    medium: "Web",
-    description: "企業・団体の公式サイトを企画から制作まで。目的に合わせた構成とデザインで伝えたいことを届けます。",
-    span: "col-span-2 row-span-2",
-  },
-  {
-    title: "LP制作",
-    medium: "Landing",
-    description: "集客・成約に特化したランディングページ。コンバージョンを見据えた設計とコピーで成果を出します。",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    title: "SEO対策",
-    medium: "検索",
-    description: "検索エンジンで見つかりやすいサイトづくり。キーワード設計からコンテンツ・技術対策まで一貫して対応。",
-    span: "col-span-1 row-span-2",
-  },
-  {
-    title: "AIO対策",
-    medium: "AI",
-    description: "AIを活用した業務・マーケティングの最適化。ツール選定から運用設計まで、現場に合わせてご提案します。",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    title: "集客動線構築",
-    medium: "マーケティング",
-    description: "認知から問い合わせ・成約までの道筋を設計。チャネル設計とコンテンツで、持続的に集客できる仕組みをつくります。",
-    span: "col-span-2 row-span-1",
-  },
-]
-
 export function WorkSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const headerRef = useRef<HTMLDivElement>(null)
   const gridRef = useRef<HTMLDivElement>(null)
+  const [selectedService, setSelectedService] = useState<string | null>(null)
+
+  const selectedServiceData = services.find((service) => service.id === selectedService) ?? null
 
   useEffect(() => {
     if (!sectionRef.current || !headerRef.current || !gridRef.current) return
@@ -87,6 +59,23 @@ export function WorkSection() {
     return () => ctx.revert()
   }, [])
 
+  useEffect(() => {
+    if (!selectedService) return
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSelectedService(null)
+      }
+    }
+
+    document.body.style.overflow = "hidden"
+    window.addEventListener("keydown", onKeyDown)
+    return () => {
+      document.body.style.overflow = "auto"
+      window.removeEventListener("keydown", onKeyDown)
+    }
+  }, [selectedService])
+
   return (
     <section ref={sectionRef} id="work" className="relative py-32 pl-6 md:pl-28 pr-6 md:pr-12">
       {/* Section header */}
@@ -106,26 +95,31 @@ export function WorkSection() {
         className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px] md:auto-rows-[200px]"
       >
         {services.map((service, index) => (
-          <WorkCard key={index} experiment={service} index={index} persistHover={index === 0} />
+          <WorkCard
+            key={service.id}
+            service={service}
+            index={index}
+            persistHover={index === 0}
+            onClick={() => setSelectedService(service.id)}
+          />
         ))}
       </div>
+
+      <ServiceModal service={selectedServiceData} onClose={() => setSelectedService(null)} />
     </section>
   )
 }
 
 function WorkCard({
-  experiment,
+  service,
   index,
   persistHover = false,
+  onClick,
 }: {
-  experiment: {
-    title: string
-    medium: string
-    description: string
-    span: string
-  }
+  service: ServiceItem
   index: number
   persistHover?: boolean
+  onClick: () => void
 }) {
   const [isHovered, setIsHovered] = useState(false)
   const cardRef = useRef<HTMLElement>(null)
@@ -151,12 +145,13 @@ function WorkCard({
     <article
       ref={cardRef}
       className={cn(
-        "group relative border border-border/40 p-5 flex flex-col justify-between transition-all duration-500 cursor-pointer overflow-hidden",
-        experiment.span,
+        "group relative border border-border/40 p-5 flex flex-col justify-between transition-all duration-300 cursor-pointer overflow-hidden hover:border-orange-500/50 hover:scale-[1.02]",
+        service.span,
         isActive && "border-accent/60",
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
     >
       {/* Background layer */}
       <div
@@ -169,7 +164,7 @@ function WorkCard({
       {/* Content */}
       <div className="relative z-10">
         <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-          {experiment.medium}
+          {service.category}
         </span>
         <h3
           className={cn(
@@ -177,7 +172,7 @@ function WorkCard({
             isActive ? "text-accent" : "text-foreground",
           )}
         >
-          {experiment.title}
+          {service.title}
         </h3>
       </div>
 
@@ -189,7 +184,7 @@ function WorkCard({
             isActive ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2",
           )}
         >
-          {experiment.description}
+          {service.summary}
         </p>
       </div>
 
@@ -200,7 +195,7 @@ function WorkCard({
           isActive ? "text-accent" : "text-muted-foreground/40",
         )}
       >
-        {String(index + 1).padStart(2, "0")}
+        {service.number || String(index + 1).padStart(2, "0")}
       </span>
 
       {/* Corner line */}
