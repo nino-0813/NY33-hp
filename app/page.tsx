@@ -27,12 +27,12 @@ export default function Page() {
 
       <div className="relative z-10">
         <HeroSection />
-        <SignalsSection />
+        <PrinciplesSection />
         <WorkSection />
         <PortfolioSection />
         <AnalyticsDemoSection />
-        <PrinciplesSection />
         <PricingPlansSection />
+        <SignalsSection />
         <ColophonSection />
       </div>
     </main>

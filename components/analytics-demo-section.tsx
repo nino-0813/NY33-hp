@@ -144,26 +144,44 @@ export function AnalyticsDemoSection() {
 
               <div className="mb-5 rounded-xl border border-white/10 bg-white/5 p-4">
                 <h4 className="mb-3 text-sm font-semibold text-slate-200">セッション数の推移</h4>
-                <ResponsiveContainer width="100%" height={260}>
-                  <AreaChart data={sessionData}>
-                    <defs>
-                      <linearGradient id="sessionFill" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#10b981" stopOpacity={0.35} />
-                        <stop offset="100%" stopColor="#10b981" stopOpacity={0} />
-                      </linearGradient>
-                      <linearGradient id="userFill" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#6366f1" stopOpacity={0.25} />
-                        <stop offset="100%" stopColor="#6366f1" stopOpacity={0} />
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-                    <XAxis dataKey="date" tick={{ fill: "#64748b", fontSize: 11 }} axisLine={false} tickLine={false} />
-                    <YAxis tick={{ fill: "#64748b", fontSize: 11 }} axisLine={false} tickLine={false} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Area type="monotone" dataKey="sessions" name="セッション" stroke="#10b981" fill="url(#sessionFill)" dot={false} />
-                    <Area type="monotone" dataKey="users" name="ユーザー" stroke="#6366f1" fill="url(#userFill)" dot={false} />
-                  </AreaChart>
-                </ResponsiveContainer>
+                <div className="overflow-x-auto">
+                  <div className="min-w-[560px]">
+                    <ResponsiveContainer width="100%" height={260}>
+                      <AreaChart data={sessionData}>
+                        <defs>
+                          <linearGradient id="sessionFill" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#10b981" stopOpacity={0.35} />
+                            <stop offset="100%" stopColor="#10b981" stopOpacity={0} />
+                          </linearGradient>
+                          <linearGradient id="userFill" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#6366f1" stopOpacity={0.25} />
+                            <stop offset="100%" stopColor="#6366f1" stopOpacity={0} />
+                          </linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+                        <XAxis
+                          dataKey="date"
+                          tick={{ fill: "#64748b", fontSize: 11 }}
+                          axisLine={false}
+                          tickLine={false}
+                          interval="preserveStartEnd"
+                          minTickGap={18}
+                        />
+                        <YAxis tick={{ fill: "#64748b", fontSize: 11 }} axisLine={false} tickLine={false} />
+                        <Tooltip content={<CustomTooltip />} />
+                        <Area
+                          type="monotone"
+                          dataKey="sessions"
+                          name="セッション"
+                          stroke="#10b981"
+                          fill="url(#sessionFill)"
+                          dot={false}
+                        />
+                        <Area type="monotone" dataKey="users" name="ユーザー" stroke="#6366f1" fill="url(#userFill)" dot={false} />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
@@ -252,15 +270,28 @@ export function AnalyticsDemoSection() {
                 <p className="mb-4 text-xs leading-relaxed text-slate-500">
                   どの導線が押されているかを可視化し、改善の優先順位を明確化できます。
                 </p>
-                <ResponsiveContainer width="100%" height={280}>
-                  <BarChart data={eventData}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-                    <XAxis dataKey="name" tick={{ fill: "#94a3b8", fontSize: 11 }} axisLine={false} tickLine={false} />
-                    <YAxis tick={{ fill: "#64748b", fontSize: 11 }} axisLine={false} tickLine={false} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Bar dataKey="count" name="クリック数" fill="#10b981" radius={[6, 6, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
+                <div className="overflow-x-auto">
+                  <div className="min-w-[520px]">
+                    <ResponsiveContainer width="100%" height={280}>
+                      <BarChart data={eventData} margin={{ bottom: 12 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+                        <XAxis
+                          dataKey="name"
+                          tick={{ fill: "#94a3b8", fontSize: 11 }}
+                          axisLine={false}
+                          tickLine={false}
+                          interval={0}
+                          angle={-20}
+                          textAnchor="end"
+                          height={52}
+                        />
+                        <YAxis tick={{ fill: "#64748b", fontSize: 11 }} axisLine={false} tickLine={false} />
+                        <Tooltip content={<CustomTooltip />} />
+                        <Bar dataKey="count" name="クリック数" fill="#10b981" radius={[6, 6, 0, 0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                </div>
               </div>
             </>
           )}

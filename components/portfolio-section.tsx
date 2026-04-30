@@ -72,7 +72,7 @@ export function PortfolioSection() {
         ref={gridRef}
         className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px] md:auto-rows-[200px]"
       >
-        {portfolioItems.map((item, index) => (
+        {portfolioItems.slice(0, 2).map((item, index) => (
           <PortfolioCard key={index} item={item} index={index} persistHover={index === 0} />
         ))}
       </div>
