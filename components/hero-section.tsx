@@ -40,7 +40,7 @@ export function HeroSection() {
     <section ref={sectionRef} id="hero" className="relative min-h-screen flex items-center pl-6 md:pl-28 pr-6 md:pr-12">
       <div className="absolute inset-0 z-0" aria-hidden="true">
         <Image
-          src="/portfolio/スクリーンショット 2026-04-30 11.27.43.png"
+          src="/portfolio/hero-bg.png"
           alt=""
           fill
           priority

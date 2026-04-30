@@ -287,7 +287,7 @@ export function ColophonSection() {
               <div className="relative w-full max-w-[260px] overflow-hidden rounded-xl border border-white/10 bg-white/[0.03]">
                 <div className="relative aspect-[4/5] w-full">
                   <Image
-                    src="/portfolio/スクリーンショット 2026-04-29 12.25.09.png"
+                    src="/portfolio/founder-profile.png"
                     alt="代表社員 二宮佑介"
                     fill
                     className="object-cover"

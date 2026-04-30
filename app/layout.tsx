@@ -11,6 +11,9 @@ import { GA_MEASUREMENT_ID } from "@/lib/gtag"
 import { SITE_PUBLIC_URL } from "@/lib/site"
 import "./globals.css"
 
+const OG_IMAGE_PATH = "/portfolio/og-image.png"
+const FAVICON_IMAGE_PATH = "/portfolio/favicon.png"
+
 const ibmPlexSans = IBM_Plex_Sans({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
@@ -25,9 +28,29 @@ const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--f
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_PUBLIC_URL),
-  title: "合同会社NY33 — 広島県尾道市因島 | Web制作・マーケティング",
+  title: "尾道のウェブサイト制作・SEO対策なら合同会社NY33｜広島県尾道市因島",
   description:
-    "広島県尾道市因島の合同会社NY33。HP制作・LP制作・SEO対策・AIO対策・マーケティング集客動線構築。",
+    "尾道（因島）でWebサイト制作・LP制作・SEO対策。集客導線の設計とGA4計測で、地方企業の売上につながるWebを構築します。初回相談無料。",
+  openGraph: {
+    type: "website",
+    url: "/",
+    title: "尾道のウェブサイト制作・SEO対策なら合同会社NY33｜広島県尾道市因島",
+    description:
+      "尾道（因島）でWebサイト制作・LP制作・SEO対策。集客導線の設計とGA4計測で、地方企業の売上につながるWebを構築します。初回相談無料。",
+    images: [
+      {
+        url: OG_IMAGE_PATH,
+        alt: "合同会社NY33｜尾道のウェブサイト制作・SEO対策",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "尾道のウェブサイト制作・SEO対策なら合同会社NY33｜広島県尾道市因島",
+    description:
+      "尾道（因島）でWebサイト制作・LP制作・SEO対策。集客導線の設計とGA4計測で、地方企業の売上につながるWebを構築します。初回相談無料。",
+    images: [OG_IMAGE_PATH],
+  },
   generator: "v0.app",
   verification: {
     google: "6X4w5YbULu48pJ2_p-xRuqrUeIvplICPqfkKY5Fr2Nw",
@@ -35,19 +58,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
+        url: FAVICON_IMAGE_PATH,
+        type: "image/png",
       },
     ],
-    apple: "/apple-icon.png",
+    apple: FAVICON_IMAGE_PATH,
   },
 }
 
