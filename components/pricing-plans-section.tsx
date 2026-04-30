@@ -297,10 +297,10 @@ export function PricingPlansSection() {
             <article
               key={plan.name}
               onClick={() => setExpandedPlan(i)}
-              className="relative overflow-hidden rounded-2xl border border-border/40 bg-background/30 backdrop-blur-sm cursor-pointer transition-transform duration-300"
+              className="relative overflow-hidden rounded-2xl border border-border/40 bg-background/30 backdrop-blur-sm cursor-pointer transition-transform duration-300 h-full flex flex-col"
               style={{
                 borderColor: isExpanded ? `${plan.color}88` : undefined,
-                transform: isExpanded ? "translateY(-4px)" : "translateY(0px)",
+                boxShadow: isExpanded ? "0 18px 45px rgba(0,0,0,0.35)" : undefined,
               }}
             >
               {plan.popular && (
@@ -330,33 +330,35 @@ export function PricingPlansSection() {
                 </p>
               </div>
 
-              <div className="px-7 pb-7">
-                {plan.features.map((cat) => (
-                  <div key={cat.category} className="mb-5">
-                    <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{cat.category}</p>
-                    {cat.items.map((item) => (
-                      <div key={item.text} className="flex items-start gap-2 py-1">
-                        <span className="mt-[1px] shrink-0" style={{ color: item.included ? plan.color : undefined }}>
-                          {item.included ? <CheckIcon /> : <XIcon />}
-                        </span>
-                        <span
-                          className="font-mono text-xs leading-relaxed"
-                          style={{
-                            color: item.included ? "var(--foreground)" : "var(--muted-foreground)",
-                            opacity: item.included ? 0.9 : 0.45,
-                          }}
-                        >
-                          {item.text}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                ))}
+              <div className="px-7 pb-7 flex flex-col flex-1">
+                <div className="flex-1">
+                  {plan.features.map((cat) => (
+                    <div key={cat.category} className="mb-5">
+                      <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{cat.category}</p>
+                      {cat.items.map((item) => (
+                        <div key={item.text} className="flex items-start gap-2 py-1">
+                          <span className="mt-[1px] shrink-0" style={{ color: item.included ? plan.color : undefined }}>
+                            {item.included ? <CheckIcon /> : <XIcon />}
+                          </span>
+                          <span
+                            className="font-mono text-xs leading-relaxed"
+                            style={{
+                              color: item.included ? "var(--foreground)" : "var(--muted-foreground)",
+                              opacity: item.included ? 0.9 : 0.45,
+                            }}
+                          >
+                            {item.text}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
 
-                <div className="mt-5 border-t border-border/30 pt-5">
+                <div className="mt-auto border-t border-border/30 pt-5">
                   <Button
                     type="button"
-                    className="w-full font-mono text-xs tracking-[0.1em]"
+                    className="w-full font-mono text-xs tracking-[0.1em] font-bold"
                     style={{ backgroundColor: plan.color }}
                     onClick={(e) => {
                       e.stopPropagation()
